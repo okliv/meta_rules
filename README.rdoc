@@ -1,3 +1,20 @@
-= MetaRules
+= MetaRules - dynamic patterns for SEO meta tags
 
-This project rocks and uses MIT-LICENSE.
+== description
+
+Define with ease dynamic rules to compose SEO meta tags (title, description, keywords, h1) and alt-n-title for images using simple YML syntax
+
+== how it works:
+ - catch `request.fullpath`
+ - match user-defined rule based on current route's `controller#action` and `request.GET` params
+ - match user-defined pattern for every meta tag based on matched rule
+ - compose every meta tag using user-defined static and dynamic snippets based on matched pattern
+ - render it in a views(or layouts) with a helper
+ - have fun
+
+== how to use
+
+1 Install `gem 'meta_rules', github: 'okliv/meta_rules'`
+2 Generate example file `rails g meta_rules:install`
+3 Read comments inside `config/locales/meta_rules.en.yml` file
+4 Make your own
