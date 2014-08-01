@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.version     = MetaRules::VERSION
   s.authors     = ["okliv"]
   s.email       = ["@"]
-  s.homepage    = "/"
+  s.homepage    = "http://google.com"
   s.summary     = "MetaRules - dynamic patterns for SEO meta tags"
   s.description = "Define with ease dynamic rules to compose SEO meta tags (title, description, keywords, h1) and alt-n-title for images using simple YML syntax"
   s.license     = "MIT"
