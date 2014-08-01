@@ -7,9 +7,9 @@ Define with ease dynamic rules to compose SEO meta tags (title, description, key
 == how it works
 
 1. catches <tt>request.fullpath</tt>
-2. matches user-defined rule based on current route's <tt>controller#action</tt> and <tt>request.GET</tt> params
-3. matches user-defined pattern for every meta tag based on matched rule
-4. composes every meta tag using user-defined static and dynamic snippets based on matched pattern
+2. matches user-defined *rule* based on current route's <tt>controller#action</tt> and <tt>request.GET</tt> params
+3. matches user-defined *pattern* for every meta tag based on matched *rule*
+4. composes every meta tag using user-defined static and dynamic snippets based on matched *pattern*
 5. renders it in a views(or layouts) with a helper
 6. makes yo happy
 
