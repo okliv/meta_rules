@@ -6,16 +6,16 @@ Define with ease dynamic rules to compose SEO meta tags (title, description, key
 
 == how it works
 
-* 1. catches +request.fullpath+
-  2. matches user-defined rule based on current route's +controller#action+ and +request.GET+ params
-  3. matches user-defined pattern for every meta tag based on matched rule
-  4. composes every meta tag using user-defined static and dynamic snippets based on matched pattern
-  5. renders it in a views(or layouts) with a helper
-* 6. makes yo happy
+1. catches <tt>request.fullpath</tt>
+2. matches user-defined rule based on current route's <tt>controller#action</tt> and <tt>request.GET</tt> params
+3. matches user-defined pattern for every meta tag based on matched rule
+4. composes every meta tag using user-defined static and dynamic snippets based on matched pattern
+5. renders it in a views(or layouts) with a helper
+6. makes yo happy
 
 == how to use
 
-* 1. Install +gem 'meta_rules', github: 'okliv/meta_rules'+
-  2. Generate example file +rails g meta_rules:install+
-  3. Read comments inside +config/locales/meta_rules.en.yml+ {file}[https://github.com/okliv/meta_rules/blob/master/lib/generators/meta_rules/install/templates/meta_rules.en.yml]
-* 4. Make your app more SEO friendly
+1. Install <tt>gem 'meta_rules', github: 'okliv/meta_rules'</tt>
+2. Generate example file <tt>rails g meta_rules:install</tt>
+3. Read comments inside <tt>config/locales/meta_rules.en.yml</tt> {file}[https://github.com/okliv/meta_rules/blob/master/lib/generators/meta_rules/install/templates/meta_rules.en.yml]
+4. Make your app more SEO friendly
