@@ -1,0 +1,67 @@
+en:
+  #you can extract any part of this YML to separate file like meta_rules.rules.en.yml, meta_rules.substitutions.en.yml, meta_rules.titles.en.yml and so on
+  meta_rules:
+
+    #GLOBAL VARS DND!
+    any: ANY #var for allowing any value for get_params
+    data_image_number_attr: "meta-image_number" #in case you need to pass image number to alt or title you can pass it with image_tag(image.path, "meta-image_number"=>index), where "index" - your cycle iterator in <% images.each_with_index |image, index| %> (lt it be 12 for later use)
+    image_number_word: " - image " #is needed for render something like <img src="/wedding_photos/12.jpg" alt="my biggest mistake - wedding >>> - image <<< 12" />
+
+    #RULES TO PASS TO APPLY SUBSTITUTIONS
+    rules: #iterates like routes in routes.rb - first matched rule will be applied
+      rule_01:
+        action:
+          allowed: "pages#show" #rule will be passed only for "show" action of "pages" controller
+        get_params:
+          id: #rule will be passed only for pages.id in (10,20,30)
+            - 10
+            - 20
+            - 30
+          category: "ANY"
+      last_rule:
+        action:
+          restricted: "pages" #for any other action of any other controller except pages actions (you can skip #action definition in case you want pass all actions)
+      #TODO: more examples
+
+    #DEFAULT SNIPPETS FOR SUBSTITUTION
+    substitutions:
+      site_name: "SiteName" #site_name var placeholder
+      any_other_snippet: #there can be as many snippets as you need to compose meta tags
+      title: "" #can be defined dynamically in ApplicationsHelper with "meta_rules_extras" helper hash: def meta_rules_extras; {title: @page.title}; end. It will override matched keys of t("meta_rules.substitutions") default snippets
+      image_title: "" #can be defined dynamically with "meta-image_title" attribute inside image_tag helper options hash: image_tag(@image.path, "meta-image_title"=>@image.title). Consider "meta-" prefix for attribute as a meta_rules snippet pointer
+
+    #TITLE META TAG CONTENT PATTERNS FOR EVERY(!) RULE DEFINED ABOVE
+    title:
+      rule_01: "%{site_name} %{any_other_snippet}"
+      last_rule: "%{title} %{one_more_thing}"
+
+    #KEYWORDS META TAG CONTENT PATTERNS FOR EVERY(!) RULE DEFINED ABOVE
+    keywords:
+      rule_01: "%{site_name}"
+      last_rule: "%{title}"
+
+    #DESCRIPTION META TAG CONTENT PATTERNS FOR EVERY(!) RULE DEFINED ABOVE
+    description:
+      rule_01: "%{site_name}"
+      last_rule: "%{title}"
+
+    #KEYWORDS META TAG CONTENT PATTERNS FOR EVERY(!) RULE DEFINED ABOVE
+    h1:
+      rule_01: "%{site_name}"
+      last_rule: "%{title}"
+
+    #IMAGE ALT= ATTRIBUTE FOR CSS CLASSES DEFINED AS KEYS
+    image_alt: #NOTE! to make things happen you need to use ONLY! image_tag helper because it is overriden by gem and have all necessary magic
+      #css_class_name: "%{pattern}"
+      meta_rules_logo: "%{site_name}" # image_tag(logo.png, class: "meta_rules_logo") => <img src="/logo.png" alt="SiteName" />
+
+    #IMAGE TITLE= ATTRIBUTE FOR CSS CLASSES DEFINED AS KEYS
+    image_title:
+      #css_class_name: "%{pattern}"
+      meta_rules_logo: "%{site_name} %{image_title}" # image_tag(logo.png, class: "meta_rules_logo") => <img src="/logo.png" title="SiteName" />
+
+# LAST STEP
+#
+# Add "meta_title", "meta_description", "meta_keywords" or/and "meta_h1" heplers to the views (usually, to the head of application.html.erb layout) and see how meta_rules rules =)
+# LAST NOTE! Additionally, you can pass any dynamic snippets right inside your view, like <meta content="<%= meta_title(one_more_thing: @one.more.thing, ...)" %> name="title">
+# It will override matched keys of 'meta_rules_extras' ApplicationHelper helper and t("meta_rules.substitutions") default snippets
