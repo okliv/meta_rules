@@ -74,11 +74,11 @@ module MetaRules
     end
 
     def allowed_actions_passed
-      @allowed_actions_passed ||= (allowed_actions.include?(controller_action)||allowed_actions.include?(controller_name))
+      @allowed_actions_passed ||= (allowed_actions.include?(controller_action)||allowed_actions.include?(controller_name)||allowed_actions.include?(Rule.any))
     end
 
     def restricted_actions_passed
-      @restricted_actions_passed ||= !(restricted_actions.include?(controller_action)||restricted_actions.include?(controller_name))
+      @restricted_actions_passed ||= !(restricted_actions.include?(controller_action)||restricted_actions.include?(controller_name)||restricted_actions.include?(Rule.any))
     end
 
     def actions_passed

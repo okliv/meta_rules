@@ -19,10 +19,6 @@ module MetaRules
       meta_rule.try(:name)
     end
 
-    def extras
-      respond_to?(:meta_rules_extras) ? meta_rules_extras : {} # Hash[self.module.public_methods.map{|name| meta_rules_method = name.split('meta_rules')[1]; [meta_rules_method, send(meta_rules_method)] if meta_rules_method.presence }.compact]
-    end
-
     def image_tag(source, options={})
       options = options.try(:symbolize_keys)||{}
 
@@ -51,6 +47,12 @@ module MetaRules
 
       options[:width], options[:height] = extract_dimensions(options.delete(:size)) if options[:size]
       tag('img', options)
+    end
+
+    private
+
+    def extras
+      respond_to?(:meta_rules_extras) ? meta_rules_extras : {} # Hash[self.module.public_methods.map{|name| meta_rules_method = name.split('meta_rules')[1]; [meta_rules_method, send(meta_rules_method)] if meta_rules_method.presence }.compact]
     end
 
   end
