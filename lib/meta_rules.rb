@@ -11,6 +11,10 @@ module MetaRules
       @any ||= I18n.t('meta_rules.any')||'ANY'
     end
 
+    def self.none
+      @any ||= I18n.t('meta_rules.none')||'NONE'
+    end
+
     def self.all_rules
       @all_rules ||= I18n.t('meta_rules.rules').to_a
     end
@@ -74,7 +78,7 @@ module MetaRules
     end
 
     def allowed_actions_passed
-      @allowed_actions_passed ||= (allowed_actions.include?(controller_action)||allowed_actions.include?(controller_name)||allowed_actions.include?(Rule.any))
+      @allowed_actions_passed ||= (allowed_actions.include?(controller_action)||allowed_actions.include?(controller_name)||allowed_actions.include?(Rule.any))&&!allowed_actions.include?(Rule.none)
     end
 
     def restricted_actions_passed
@@ -92,7 +96,7 @@ module MetaRules
     def true_or_false_arr
       @true_or_false_arr ||= url_get_params.map do |key, value| #id: 12
         rule_hash_values = [*(get_params.try(:[], key))].compact.presence
-        rule_hash_values.try(:include?, value)||rule_hash_values.try(:include?, Rule.any)
+        (rule_hash_values.try(:include?, value)||rule_hash_values.try(:include?, Rule.any))&&!rule_hash_values.try(:include?, Rule.none)
       end.compact.presence||[true]
     end
 
