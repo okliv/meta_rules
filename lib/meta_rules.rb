@@ -12,7 +12,7 @@ module MetaRules
     end
 
     def self.none
-      @any ||= I18n.t('meta_rules.none', :default => 'NONE')
+      @none ||= I18n.t('meta_rules.none', :default => 'NONE')
     end
 
     def self.all_rules
