@@ -4,7 +4,7 @@ en:
 
     #GLOBAL VARS DND!
     any: ANY #var for allowing any value for get_params
-    data_image_number_attr: "meta-image_number" #in case you need to pass image number to alt or title you can pass it with image_tag(image.path, "meta-image_number"=>index), where "index" - your cycle iterator in <% images.each_with_index |image, index| %> (lt it be 12 for later use)
+    data_image_number_attr: "meta-image_number" #in case you need to pass image number to alt or title you can pass it with image_tag(image.path, "meta-image_number"=>index), where "index" - your cycle iterator in 'images.each_with_index |image, index|' (lt it be 12 for later use)
     image_number_word: " - image " #is needed for render something like <img src="/wedding_photos/12.jpg" alt="my biggest mistake - wedding >>> - image <<< 12" />
 
     #RULES TO PASS TO APPLY SUBSTITUTIONS
@@ -63,5 +63,5 @@ en:
 # LAST STEP
 #
 # Add "meta_title", "meta_description", "meta_keywords" or/and "meta_h1" heplers to the views (usually, to the head of application.html.erb layout) and see how meta_rules rules =)
-# LAST NOTE! Additionally, you can pass any dynamic snippets right inside your view, like <meta content="<%= meta_title(one_more_thing: @one.more.thing, ...)" %> name="title">
+# LAST NOTE! Additionally, you can pass any dynamic snippets right inside your view, like <meta content="#{ meta_title(one_more_thing: @one.more.thing, any_other_key: value) }" name="title">
 # It will override matched keys of 'meta_rules_extras' ApplicationHelper helper and t("meta_rules.substitutions") default snippets
