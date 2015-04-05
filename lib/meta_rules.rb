@@ -42,7 +42,7 @@ module MetaRules
     end
 
     def path_params
-      @path_params ||= Rails.application.routes.recognize_path(url)
+      @path_params ||= Rails.application.routes.recognize_path(url) rescue {}
     end
 
     def url_params
