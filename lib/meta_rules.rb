@@ -96,7 +96,8 @@ module MetaRules
     def true_or_false_arr
       @true_or_false_arr ||= url_get_params.map do |key, value| #id: 12
         rule_hash_values = [*(get_params.try(:[], key))].compact.presence
-        rule_hash_values.try(:include?, value)||rule_hash_values.try(:include?, Rule.any)&&!rule_hash_values.try(:include?, Rule.none)
+        # rule_hash_values.try(:include?, value)||
+        rule_hash_values.select{ |r| r[/#{value}/] }.size>0||rule_hash_values.try(:include?, Rule.any)&&!rule_hash_values.try(:include?, Rule.none)
       end.compact.presence||[true]
     end
 
